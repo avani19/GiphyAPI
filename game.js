@@ -1,6 +1,8 @@
 var emotionsGiphyArry = ["Bored", "Confused", "Inspired", "Lonely", "Scared", "Surprised", "Tired", "Nervous", "Pain", "Reaction", "Hungry", "Sassy", "Drunk", "Shocked", "Frustrated"];
 var currentGiphy;
 var arryOfGif;
+var arryOfPausedGif;
+var newGiphy;
 var giph;
 
 function displayGiphy(){
@@ -15,14 +17,23 @@ function displayGiphy(){
 	
 	$.each(currentGiphy, function(index, value){
 	arryOfGif= value.images.original.url;
-	var newGiphy = $('<img class="img-rounded">');
-	newGiphy.attr('src', arryOfGif);
+	arryOfPausedGif = value.images.original_still.url;
+	newGiphy = $('<img class="img-rounded">');
+	newGiphy.attr('src', arryOfPausedGif);
+	newGiphy.addClass('choice');
+	newGiphy.attr('data-play', arryOfGif);
+	newGiphy.attr('data-paused', arryOfPausedGif);
 	$("#giphyDiv").append(newGiphy);
 	});
 });
-
-
 }
+$(document).on('mouseover','.choice', function(){
+           $(this).attr('src', $(this).data('play'));                 
+}); 
+$(document).on('mouseleave','.choice', function(){
+           $(this).attr('src', $(this).data('paused'));                   
+});
+
 // show list of the button
 function addNewGiphyButton(){
 	$("#giphyList").html('');
