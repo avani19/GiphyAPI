@@ -27,6 +27,7 @@ function displayGiphy(){
 	});
 });
 }
+// attribute class.
 $(document).on('mouseover','.choice', function(){
            $(this).attr('src', $(this).data('play'));                 
 }); 
